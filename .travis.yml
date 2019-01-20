@@ -31,6 +31,12 @@ matrix:
         - make test
 
     - name: clang + gcc-6 + gcc-7 compilation
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang++   # otherwise doesn't find iostream
       script:
         - make gcc6install gcc7install
         - CC=gcc-6 CFLAGS=-Werror make -j all

@@ -1,0 +1,85 @@
+// Copyright (C) 2017 The Android Open Source Project
+
+cc_binary_host {
+    name: "zstd_host",
+    cflags: [
+        "-DZSTD_LZ4DECOMPRESS",
+        "-DZSTD_LZ4COMPRESS",
+        "-DZSTD_GZCOMPRESS",
+        "-DZSTD_GZCOMPRESS",
+        "-O3",
+	"-Wno-unused-parameter",
+    ],
+    
+    cppflags: [
+        "-DZSTD_MULTITHREAD",
+        "-DXXH_NAMESPACE=ZSTD_",
+    ],
+    host_ldlibs: ["-lpthread"],    
+    
+    include_dirs: [
+        "external/zstd/lib/common",
+        "external/zstd/lib/dictBuilder",
+        "external/zstd/lib/compress",
+    ],
+
+    srcs: [
+        "zstdcli.c",
+        "fileio.c",
+        "benchzstd.c",
+        "datagen.c",
+        "dibio.c",
+        "benchfn.c",
+        "util.c",
+    ],
+    
+    static_libs: [
+        "libzstd",
+        "liblz4",
+        "liblzma",
+        "libz",
+    ],
+    stl: "libc++_static",
+}
+
+cc_binary {
+    name: "zstd",
+    cflags: [
+        "-DZSTD_LZ4DECOMPRESS",
+        "-DZSTD_LZ4COMPRESS",
+        "-DZSTD_GZCOMPRESS",
+        "-DZSTD_GZCOMPRESS",
+        "-O3",
+	"-Wno-unused-parameter",
+    ],
+    
+    cppflags: [
+        "-DZSTD_MULTITHREAD",
+        "-DXXH_NAMESPACE=ZSTD_",
+    ],
+    host_ldlibs: ["-lpthread"],    
+    
+    include_dirs: [
+        "external/zstd/lib/common",
+        "external/zstd/lib/dictBuilder",
+        "external/zstd/lib/compress",
+    ],
+
+    srcs: [
+        "zstdcli.c",
+        "fileio.c",
+        "benchzstd.c",
+        "datagen.c",
+        "dibio.c",
+        "benchfn.c",
+        "util.c",
+    ],
+    
+    static_libs: [
+        "libzstd",
+        "liblz4",
+        "liblzma",
+        "libz",
+    ],
+    stl: "libc++_static",
+}
